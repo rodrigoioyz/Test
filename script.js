@@ -82,4 +82,11 @@
     }
   );
 
-  const volumeIndicator =
+  const volumeIndicator = new TradingView.widget(
+    {
+      "symbol": "COINBASE:BTCUSD",
+      "interval": "D",
+      "timezone": "Etc/UTC",
+      "volumePaneSize": "medium",
+      "container_id": "volume-indicator",
+      "library_path": "https
