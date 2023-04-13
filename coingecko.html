@@ -18,28 +18,30 @@
       </nav>
     </header>
 
-    <div class="section" id="section1">
+    <div class="contenido">
       <h2>Contenido</h2>
-      <p>Aquí puedes ver el APY de Coingecko:</p>
-      <canvas id="apy-chart"></canvas>
+      <div class="barra-lateral">
+        <ul>
+          <li><a href="coingecko.html">coingecko</a></li>
+          <li><a href="#">Tema 2</a></li>
+          <li><a href="#">Tema 3</a></li>
+        </ul>
+      </div>
+
+      <div class="contenido-principal">
+        <p>Aquí va el contenido principal</p>
+      </div>
     </div>
 
-    <div class="section" id="section2">
-      <h2>Precio actual de BTC</h2>
-      <p>Aquí puedes ver el precio actual de BTC:</p>
-      <div id="btc-price"></div>
-      <canvas id="btc-chart"></canvas>
+    <div class="logos-bar">
+      <marquee behavior="scroll" direction="left">
+        <a href="https://atalaprism.io/"><img src="logo1.png" alt="Logo 1"></a> 
+        <a href="https://emurgo.io/"><img src="logo2.png" alt="Logo 2"></a> 
+        <a href="https://pioneers.marlowe-finance.io/"><img src="logo3.png" alt="Logo 3"></a> 
+        <a href="https://beefchain.io/"><img src="logo4.png" alt="Logo 4"></a> 
+      </marquee>
     </div>
 
-    <div class="section" id="section3">
-      <h2>Precio actual de Cardano</h2>
-      <p>Aquí puedes ver el precio actual de Cardano:</p>
-      <div id="cardano-price"></div>
-      <canvas id="cardano-chart"></canvas>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
