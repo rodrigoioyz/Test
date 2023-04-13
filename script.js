@@ -1,102 +1,85 @@
-// Obtener el elemento canvas y el contexto 2D para el gráfico de APY
-const apyChart = document.getElementById('apy-chart');
-const apyCtx = apyChart.getContext('2d');
+<!-- Incluye la librería TradingView -->
+<script src="https://s3.tradingview.com/tv.js"></script>
 
-// Configurar los datos y opciones iniciales del gráfico de APY
-const apyData = {
-  labels: [],
-  datasets: [{
-    label: 'APY',
-    data: [],
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgba(54, 162, 235, 1)',
-    borderWidth: 1
-  }]
-};
+<!-- Crea un div para el gráfico de BTC -->
+<div id="btc-chart"></div>
 
-const apyOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
-      }
-    }]
-  }
-};
+<!-- Crea un div para el gráfico de Cardano -->
+<div id="cardano-chart"></div>
 
-// Obtener los datos del APY de Coingecko utilizando su API para Cardano
-fetch('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_24hr_change=true')
-  .then(response => response.json())
-  .then(dataResponse => {
-    // Crear un nuevo objeto con los datos necesarios para Cardano
-    const cardanoData = {
-      labels: ['USD'],
-      datasets: [{
-        label: 'APY de Cardano',
-        data: [dataResponse.cardano.usd_24h_change],
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
-      }]
-    };
+<!-- Crea un div para el selector de temporalidad -->
+<div id="timeframe-selector"></div>
 
-    // Actualizar los datos del gráfico de APY con los datos de Cardano
-    apyData.labels = cardanoData.labels;
-    apyData.datasets.push(cardanoData.datasets[0]);
+<!-- Crea un div para el selector de tipo de velas -->
+<div id="chart-type-selector"></div>
 
-    // Crear y mostrar el gráfico de APY actualizado
-    new Chart(apyCtx, {
-      type: 'bar',
-      data: apyData,
-      options: apyOptions
-    });
-  });
+<!-- Crea un div para el indicador de volumen -->
+<div id="volume-indicator"></div>
 
-// Obtener el elemento canvas y el contexto 2D para el gráfico de precio y volumen
-const priceChart = document.getElementById('price-chart');
-const priceCtx = priceChart.getContext('2d');
+<!-- Agrega el script para crear los gráficos -->
+<script>
+  const btcChart = new TradingView.widget(
+    {
+      "width": 980,
+      "height": 610,
+      "symbol": "COINBASE:BTCUSD",
+      "interval": "D",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "container_id": "btc-chart"
+    }
+  );
 
-// Configurar los datos y opciones iniciales del gráfico de precio y volumen
-const priceData = {
-  labels: [],
-  datasets: [{
-    label: 'Precio',
-    data: [],
-    yAxisID: 'precio',
-    type: 'line',
-    fill: false,
-    borderColor: 'rgba(54, 162, 235, 1)',
-    borderWidth: 1
-  }, {
-    label: 'Volumen',
-    data: [],
-    yAxisID: 'volumen',
-    type: 'bar',
-    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    borderColor: 'rgba(255, 99, 132, 1)',
-    borderWidth: 1
-  }]
-};
+  const cardanoChart = new TradingView.widget(
+    {
+      "width": 980,
+      "height": 610,
+      "symbol": "BINANCE:ADAUSDT",
+      "interval": "D",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "container_id": "cardano-chart"
+    }
+  );
 
-const priceOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    xAxes: [{
-      type: 'time',
-      time: {
-        unit: 'hour'
-      }
-    }],
-    yAxes: [{
-      id: 'precio',
-      position: 'left',
-      ticks: {
-        beginAtZero: true
-      }
-    }, {
-      id: 'volumen',
-      position: 'right',
-      ticks: {
+  const timeframeSelector = new TradingView.widget.selectors.Timeframe(
+    {
+      "container_id": "timeframe-selector",
+      "datafeed": new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+      "input_id": "timeframe-input",
+      "button_id": "timeframe-button",
+      "timeframes": [
+        { "text": "1H", "resolution": "60" },
+        { "text": "1D", "resolution": "D" },
+        { "text": "1W", "resolution": "W" },
+        { "text": "1M", "resolution": "M" },
+        { "text": "1Y", "resolution": "12M" }
+      ]
+    }
+  );
+
+  const chartTypeSelector = new TradingView.widget.selectors.Type(
+    {
+      "container_id": "chart-type-selector",
+      "datafeed": new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+      "input_id": "chart-type-input",
+      "button_id": "chart-type-button",
+      "types": [
+        { "text": "Candlesticks", "value": "1" },
+        { "text": "Line", "value": "3" },
+        { "text": "Bars", "value": "2" }
+      ]
+    }
+  );
+
+  const volumeIndicator =
