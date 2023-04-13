@@ -19,7 +19,7 @@ const btcChart = new TradingView.widget(
 "enable_publishing": false,
 "allow_symbol_change": true,
 "container_id": "btc-chart",
-"datafeed": new UDFCompatibleDatafeed("https://crypto-data-feed.com/udf/"),
+"datafeed": new UDFCompatibleDatafeed("https://unpkg.com/@tv/datafeed-coingecko@1.0.0/dist/bundle.production.min.js"),
 }
 );
 
@@ -27,7 +27,7 @@ const cardanoChart = new TradingView.widget(
 {
 "width": 980,
 "height": 610,
-"symbol": "BINANCE:ADAUSDT",
+"symbol": "BINANCE:ADAUSD",
 "interval": "D",
 "timezone": "Etc/UTC",
 "theme": "dark",
@@ -37,20 +37,20 @@ const cardanoChart = new TradingView.widget(
 "enable_publishing": false,
 "allow_symbol_change": true,
 "container_id": "cardano-chart",
-"datafeed": new UDFCompatibleDatafeed("https://crypto-data-feed.com/udf/"),
+"datafeed": new UDFCompatibleDatafeed("https://unpkg.com/@tv/datafeed-coingecko@1.0.0/dist/bundle.production.min.js"),
 }
 );
 
 const timeframeSelector = new TradingView.widget.selectors.Timeframe(
 {
 "container_id": "timeframe-selector",
-"datafeed": new UDFCompatibleDatafeed("https://crypto-data-feed.com/udf/"),
+"datafeed": new UDFCompatibleDatafeed("https://unpkg.com/@tv/datafeed-coingecko@1.0.0/dist/bundle.production.min.js"),
 "input_id": "timeframe-input",
 "button_id": "timeframe-button",
 "timeframes": [
-{ text: "1D", resolution: "D" },
-{ text: "1W", resolution: "W" },
-{ text: "1M", resolution: "M" },
+{ text: "1D", resolution: "1D" },
+{ text: "1W", resolution: "1W" },
+{ text: "1M", resolution: "1M" },
 ],
 }
 );
@@ -58,7 +58,7 @@ const timeframeSelector = new TradingView.widget.selectors.Timeframe(
 const chartTypeSelector = new TradingView.widget.selectors.ChartType(
 {
 "container_id": "chart-type-selector",
-"datafeed": new UDFCompatibleDatafeed("https://crypto-data-feed.com/udf/"),
+"datafeed": new UDFCompatibleDatafeed("https://unpkg.com/@tv/datafeed-coingecko@1.0.0/dist/bundle.production.min.js"),
 "chart_types": [
 { id: "1", text: "Candles", resolution: "" },
 { id: "2", text: "Bars", resolution: "" },
@@ -70,6 +70,6 @@ const chartTypeSelector = new TradingView.widget.selectors.ChartType(
 const volumeIndicator = new TradingView.widget.indicators.Volume(
 {
 "container_id": "volume-indicator",
-"datafeed": new UDFCompatibleDatafeed("https://crypto-data-feed.com/udf/"),
+"datafeed": new UDFCompatibleDatafeed("https://unpkg.com/@tv/datafeed-coingecko@1.0.0/dist/bundle.production.min.js"),
 }
 );
