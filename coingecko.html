@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title>Inicio - Sitio de pruebas </title>
     <link rel="stylesheet" type="text/css" href="test.css"> 
+    <!-- Agrega las librerías de TradingView y jQuery -->
+    <script type="text/javascript" src="https://unpkg.com/@tradingview/charting-library@1.14.7/umd/charting_library.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <header>
@@ -28,8 +31,10 @@
         </ul>
       </div>
 
+      <!-- Agrega los elementos de div para los gráficos de TradingView -->
       <div class="contenido-principal">
-        <p>Aquí va el contenido principal</p>
+        <div id="btc-chart"></div>
+        <div id="cardano-chart"></div>
       </div>
     </div>
 
@@ -42,6 +47,7 @@
       </marquee>
     </div>
 
+    <!-- Agrega el script.js al final del archivo HTML -->
     <script src="script.js"></script>
   </body>
-</html>
+</html> 
