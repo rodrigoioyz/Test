@@ -56,16 +56,6 @@ p {
 	line-height: 1.5;
 	margin-bottom: 20px;
 }
-
-/* Estilos para el pie de página */
-footer {
-	background-color: #121212;
-	color: #fff;
-	padding: 20px;
-	text-align: center;
-	font-family: 'Lato', sans-serif;
-	font-size: 14px;
-}
 .logos-bar {
   background-color: #f8f8f8;
   height: 50px;
@@ -75,4 +65,14 @@ footer {
 .logos-bar img {
   height: 30px;
   margin: 10px;
+}
+
+/* Estilos para el pie de página */
+footer {
+	background-color: #121212;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
 }
