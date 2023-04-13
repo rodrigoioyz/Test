@@ -84,9 +84,6 @@
 
   const volumeIndicator = new TradingView.widget(
     {
-      "symbol": "COINBASE:BTCUSD",
-      "interval": "D",
-      "timezone": "Etc/UTC",
-      "volumePaneSize": "medium",
       "container_id": "volume-indicator",
-      "library_path": "https
+      "datafeed": new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+      "library_path": "https://s3.tradingview.com/external
