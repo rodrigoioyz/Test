@@ -4,6 +4,7 @@
   <title>Gráfico TradingView</title>
   <meta charset="UTF-8">
   <script src="https://unpkg.com/lightweight-charts@3.1.1/dist/lightweight-charts.standalone.production.js"></script>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 </head>
 <body>
   <div id="tv_chart"></div>
@@ -49,6 +50,24 @@
       .catch(error => {
         console.error('Error al obtener los datos:', error);
       });
+
+    new TradingView.widget(
+      {
+        "width": 980,
+        "height": 610,
+        "symbol": "BINANCE:BTCUSDT",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": "tv_chart_container"
+      }
+    );
   </script>
+  <div id="tv_chart_container"></div>
 </body>
 </html>
