@@ -54,3 +54,15 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=u
     });
   })
   .catch(error => console.error(error));
+// Obtener el elemento donde se mostrará el precio de BTC
+const btcPriceElement = document.getElementById('btc-price');
+
+// Obtener el precio actual de BTC utilizando la API de Coingecko
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+  .then(response => response.json())
+  .then(data => {
+    // Mostrar el precio de BTC en el elemento correspondiente
+    btcPriceElement.innerText = `$${data.bitcoin.usd}`;
+  })
+  .catch(error => console.error(error));
+
