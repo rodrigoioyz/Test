@@ -1,78 +1,54 @@
-// Obtener el elemento canvas y el contexto 2D
-const myChart = document.getElementById('myChart');
-const ctx = myChart.getContext('2d');
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gráfico TradingView</title>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/lightweight-charts@3.1.1/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <div id="tv_chart"></div>
+  <script>
+    const chart = LightweightCharts.createChart(document.getElementById('tv_chart'), {
+      width: 600,
+      height: 300
+    });
 
-// Configurar los datos del gráfico
-const data = {
-  labels: [], // las etiquetas se agregarán después
-  datasets: [{
-    label: 'Precio',
-    data: [], // los datos se agregarán después
-    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-    borderColor: 'rgba(54, 162, 235, 1)',
-    borderWidth: 1
-  }, {
-    label: 'Volumen',
-    data: [], // los datos se agregarán después
-    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    borderColor: 'rgba(255, 99, 132, 1)',
-    borderWidth: 1
-  }]
-};
+    const btcSeries = chart.addCandlestickSeries({
+      title: 'BTC',
+      priceFormat: {
+        type: 'volume',
+      },
+    });
 
-// Configurar las opciones del gráfico
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    xAxes: [{
-      type: 'time',
-      time: {
-        unit: 'day'
-      }
-    }],
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
-      }
-    }]
-  }
-};
+    const adaSeries = chart.addCandlestickSeries({
+      title: 'ADA',
+      priceFormat: {
+        type: 'volume',
+      },
+    });
 
-// Obtener los datos del precio y volumen utilizando la API de Coingecko
-fetch('https://api.coingecko.com/api/v3/coins/cardano/market_chart?vs_currency=usd&days=max&interval=30min')
-  .then(response => response.json())
-  .then(dataResponse => {
-    // Crear un array de objetos con los datos necesarios
-    const chartData = {
-      prices: [],
-      volumes: []
+    const fetchChartData = (symbol) => {
+      return fetch(`https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=max&interval=daily`)
+        .then(response => response.json())
+        .then(data => {
+          return data.prices.map(price => ({
+            time: price[0] / 1000, // la API de CoinGecko proporciona la fecha en milisegundos
+            open: price[1],
+            high: price[2],
+            low: price[3],
+            close: price[4],
+          }));
+        });
     };
 
-    for (let i = 0; i < dataResponse.prices.length; i++) {
-      chartData.prices.push({
-        x: dataResponse.prices[i][0],
-        y: dataResponse.prices[i][1]
+    Promise.all([fetchChartData('bitcoin'), fetchChartData('cardano')])
+      .then(([btcData, adaData]) => {
+        btcSeries.setData(btcData);
+        adaSeries.setData(adaData);
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
       });
-
-      chartData.volumes.push({
-        x: dataResponse.prices[i][0],
-        y: dataResponse.total_volumes[i][1]
-      });
-    }
-
-    // Actualizar el objeto "data" con los nuevos datos
-    data.labels = chartData.prices.map(d => d.x);
-    data.datasets[0].data = chartData.prices.map(d => d.y);
-    data.datasets[1].data = chartData.volumes.map(d => d.y);
-
-    // Crear el gráfico
-    new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: options
-    });
-  })
-  .catch(error => {
-    console.error('Error al obtener los datos:', error);
-  });
+  </script>
+</body>
+</html>
