@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitio web con menú</title>
+  <style>
+    body {
+      background-color: #FA8072; /* Color sandía */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      text-align: center;
+      padding: 20px;
+      color: #FFF;
+    }
+    
+    nav {
+      text-align: center;
+      margin: 20px;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    nav ul li a {
+      color: #FFF;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    main {
+      padding: 20px;
+      color: #FFF;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sitio web con menú</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#opcion1">Opción 1</a></li>
+      <li><a href="#opcion2">Opción 2</a></li>
+      <li><a href="#opcion3">Opción 3</a></li>
+      <li><a href="#opcion4">Opción 4</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section id="opcion1">
+      <h2>Opción 1</h2>
+      <p>Contenido de la opción 1.</p>
+    </section>
+    
+    <section id="opcion2">
+      <h2>Opción 2</h2>
+      <p>Contenido de la opción 2.</p>
+    </section>
+    
+    <section id="opcion3">
+      <h2>Opción 3</h2>
+      <p>Contenido de la opción 3.</p>
+    </section>
+    
+    <section id="opcion4">
+      <h2>Opción 4</h2>
+      <p>Contenido de la opción 4.</p>
+    </section>
+  </main>
+</body>
+</html>
